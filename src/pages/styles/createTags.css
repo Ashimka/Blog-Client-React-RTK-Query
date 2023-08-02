@@ -1,0 +1,12 @@
+.create-tags {
+  max-width: 800px;
+  margin: 2rem 0;
+  display: flex;
+  gap: 1rem;
+}
+.input-tags {
+  width: 300px;
+  height: 2rem;
+  border-radius: 0.2rem;
+  padding-left: 0.5rem;
+}

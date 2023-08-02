@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+:focus,
+:active {
+  outline: none;
+}
+a:focus,
+a:active {
+  outline: none;
+}
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+html,
+body {
+  font: 1.5rem "Nunito", sans-serif;
+  min-height: 100vh;
+  background-color: #f9f2e3;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+button,
+textarea {
+  font-family: inherit;
+}
+input::-ms-clear {
+  display: none;
+}
+input {
+  border: 1.5px solid #c0c0c0;
+}
+button {
+  cursor: pointer;
+  border: none;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+a,
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/*  UTILITY CLASSES */
+
+.errmsg {
+  color: firebrick;
+  margin-bottom: 0.5rem;
+}
+
+/*  GENERAL STYLES */
+
+.container {
+  padding: 0 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+header {
+  background-color: #ffffff;
+}
+.header-wrap {
+  min-height: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.link-logo {
+  background-color: #0077ff;
+  color: #ffffff;
+  padding: 0.2rem;
+  border-radius: 8px;
+}
+.header__right {
+  display: flex;
+  align-items: center;
+}
+.header-link {
+  color: black;
+}
+.btn-out,
+.btn-form-image {
+  background: #0077ff;
+  opacity: 0.65;
+  margin-left: 15px;
+  color: #ffffff;
+  padding: 0.2rem;
+  border-radius: 5px;
+}
+.main {
+  flex: 1 1 auto;
+}
+
+.tag-list {
+  display: flex;
+  gap: 20px;
+}
+.hidden {
+  display: none;
+}
+.avatar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

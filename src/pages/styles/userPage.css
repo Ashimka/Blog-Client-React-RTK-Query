@@ -1,0 +1,23 @@
+.user {
+  padding-top: 1rem;
+}
+.user__header,
+.user__options,
+.user__admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.user__header-avatar {
+}
+.user__avatar-image {
+  width: 64px;
+}
+.user__name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.user__options {
+  margin: 1rem 0;
+}
