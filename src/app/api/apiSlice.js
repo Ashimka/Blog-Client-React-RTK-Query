@@ -4,7 +4,6 @@ import { setCredentials, logOut } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "/api",
-  // baseUrl: process.env.REACT_APP_BASE_URL,
 
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
