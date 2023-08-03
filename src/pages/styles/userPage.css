@@ -12,7 +12,10 @@
 .user__header-avatar {
 }
 .user__avatar-image {
+  height: 64px;
   width: 64px;
+  color: #0077ff;
+  border-radius: 50%;
 }
 .user__name {
   font-size: 1.5rem;

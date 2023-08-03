@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleUser,
+  faEye,
+  faMessage,
+} from "@fortawesome/free-regular-svg-icons";
+
 import { useGetPostsQuery } from "../features/posts/postsApiSlice";
 
 import "./styles/home.css";
 
 const Home = () => {
-  const avatarDefault = "/profile.png";
-  const views = "/show.png";
-  const comment = "/comment.png";
-
   const {
     data: postsList,
     isLoading,
@@ -33,13 +36,18 @@ const Home = () => {
               <div key={id} className="post">
                 <div className="post__header">
                   <div className="header-avatar">
-                    <img
-                      className="avatar-image"
-                      src={`${process.env.REACT_APP_BASE_URL}/uploads${
-                        post.user.avatarURL || avatarDefault
-                      }`}
-                      alt={"avatar"}
-                    />
+                    {post.user.avatarURL ? (
+                      <img
+                        className="avatar-image"
+                        src={`${process.env.REACT_APP_BASE_URL}/uploads${post.user.avatarURL}`}
+                        alt={"avatar"}
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        className="avatar-image"
+                        icon={faCircleUser}
+                      />
+                    )}
                   </div>
                   <div className="header-name">{post.user.fullName}</div>
                   <div className="header-time">{post.date}</div>
@@ -65,18 +73,13 @@ const Home = () => {
 
                 <div className="post__footer">
                   <div className="post__views">
-                    <img
-                      className="views-image"
-                      src={`${process.env.REACT_APP_BASE_URL}/uploads${views}`}
-                      alt="views"
-                    />
+                    <FontAwesomeIcon className="views-image" icon={faEye} />
                     <span>{post.viewsCount}</span>
                   </div>
                   <div className="post__comment-count">
-                    <img
+                    <FontAwesomeIcon
                       className="image-comment-btn"
-                      src={`${process.env.REACT_APP_BASE_URL}/uploads${comment}`}
-                      alt="comment"
+                      icon={faMessage}
                     />
                     <span>{post?.comments.length}</span>
                   </div>

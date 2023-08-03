@@ -16,16 +16,19 @@
   cursor: pointer;
 }
 .avatar-image {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
 }
 .header-name,
 .header-time {
   font-size: 14px;
 }
 .header-delete-post {
+  padding: 5px;
   margin-left: auto;
-  color: red;
+  color: tomato;
+  background: inherit;
 }
 .post__title {
   margin-top: 1rem;
@@ -86,10 +89,14 @@
 }
 .comment-btn {
   margin: 1rem 0;
+  background-color: #0077ff;
+  color: #ffffff;
+  padding: 0.2rem;
+  border-radius: 8px;
 }
 .image-comment-btn {
-  width: 32px;
-  height: 32px;
+  width: 18px;
+  height: 18px;
 }
 .comment-avatar {
   display: flex;
@@ -102,7 +109,7 @@
 }
 .delete-comment {
   margin-left: auto;
-  color: red;
+  color: tomato;
   cursor: pointer;
 }
 .post__comment-count {

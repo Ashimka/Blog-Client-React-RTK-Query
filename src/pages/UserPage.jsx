@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
+
 import { useGetOneUserQuery } from "../features/users/usersApiSlice";
 
 import "./styles/userPage.css";
 
 const UserPage = () => {
-  const avatarDefault = "/profile.png";
   const { data: user, isSuccess, isLoading } = useGetOneUserQuery();
   const isAdmin = user?.role?.admin;
 
@@ -19,13 +21,18 @@ const UserPage = () => {
         <section className="user">
           <div className="user__header">
             <div className="user__header-avatar">
-              <img
-                className="user__avatar-image"
-                src={`${process.env.REACT_APP_BASE_URL}/uploads${
-                  user.avatarURL || avatarDefault
-                }`}
-                alt="avatar"
-              />
+              {user.avatarURL ? (
+                <img
+                  className="user__avatar-image"
+                  src={`${process.env.REACT_APP_BASE_URL}/uploads${user.avatarURL}`}
+                  alt="avatar"
+                />
+              ) : (
+                <FontAwesomeIcon
+                  className="user__avatar-image"
+                  icon={faCircleUser}
+                />
+              )}
             </div>
             <div className="user__name">{user.fullName}</div>
           </div>

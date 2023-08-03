@@ -2,6 +2,14 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleUser,
+  faEye,
+  faTrashCan,
+  faCircleXmark,
+} from "@fortawesome/free-regular-svg-icons";
+
 import {
   useGetFullPostQuery,
   useRemovePostMutation,
@@ -19,10 +27,6 @@ const FullPost = () => {
   const { data: user } = useGetOneUserQuery();
   const [removePost] = useRemovePostMutation();
   const [removeComment] = useRemoveCommentMutation();
-
-  const avatarDefault = "profile.png";
-  const views = "show.png";
-  const comment = "comment.png";
 
   const handleRemovePost = async (id) => {
     window.confirm("Удалить пост?");
@@ -46,13 +50,18 @@ const FullPost = () => {
           <div className="post">
             <div className="post__header">
               <div className="header-avatar">
-                <img
-                  className="avatar-image"
-                  src={`${process.env.REACT_APP_BASE_URL}/uploads/${
-                    post.post.user.avatarURL || avatarDefault
-                  }`}
-                  alt="avatar"
-                />
+                {post?.post.user.avatarURL ? (
+                  <img
+                    className="avatar-image"
+                    src={`${process.env.REACT_APP_BASE_URL}/uploads${post.post.user.avatarURL}`}
+                    alt={"avatar"}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    className="avatar-image"
+                    icon={faCircleUser}
+                  />
+                )}
               </div>
               <div className="header-name">{post.post.user.fullName}</div>
               <div className="header-time">{post.post.date}</div>
@@ -61,7 +70,7 @@ const FullPost = () => {
                   onClick={() => handleRemovePost(post.post.id)}
                   className="header-delete-post"
                 >
-                  delete
+                  <FontAwesomeIcon icon={faTrashCan} />
                 </button>
               )}
             </div>
@@ -72,7 +81,7 @@ const FullPost = () => {
               {post.post.imageURL && (
                 <img
                   className="post-image"
-                  src={`${process.env.REACT_APP_BASE_URL}/uploads/${post.post.imageURL}`}
+                  src={`${process.env.REACT_APP_BASE_URL}/uploads${post.post.imageURL}`}
                   alt={post.title}
                 />
               )}
@@ -84,11 +93,7 @@ const FullPost = () => {
 
             <div className="post__footer">
               <div className="post__views">
-                <img
-                  className="views-image"
-                  src={`${process.env.REACT_APP_BASE_URL}/uploads/${views}`}
-                  alt="views"
-                />
+                <FontAwesomeIcon className="views-image" icon={faEye} />
                 <span>{post.post.viewsCount}</span>
               </div>
               <div className="post__tags">
@@ -103,13 +108,18 @@ const FullPost = () => {
                 return (
                   <div className="comment-item" key={index}>
                     <div className="comment-avatar">
-                      <img
-                        className="avatar-image"
-                        src={`${process.env.REACT_APP_BASE_URL}/uploads/${
-                          comm.user.avatarURL || avatarDefault
-                        }`}
-                        alt="avatar"
-                      />
+                      {post?.post.user.avatarURL ? (
+                        <img
+                          className="avatar-image"
+                          src={`${process.env.REACT_APP_BASE_URL}/uploads${post.post.user.avatarURL}`}
+                          alt={"avatar"}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          className="avatar-image"
+                          icon={faCircleUser}
+                        />
+                      )}
                       <div className="header-name">{comm.user.fullName}</div>
                       <div className="header-time">{comm.date}</div>
                       {user?.role.admin && (
@@ -117,7 +127,7 @@ const FullPost = () => {
                           onClick={() => handleRemoveComment(comm.id)}
                           className="delete-comment"
                         >
-                          x
+                          <FontAwesomeIcon icon={faCircleXmark} />
                         </div>
                       )}
                     </div>
@@ -130,11 +140,7 @@ const FullPost = () => {
               className="comment-btn"
               onClick={() => navigate(`/post/${params.id}/comments`)}
             >
-              <img
-                className="image-comment-btn"
-                src={`${process.env.REACT_APP_BASE_URL}/uploads/${comment}`}
-                alt="comment"
-              />
+              Написать комментарий
             </button>
           </div>
         </section>
