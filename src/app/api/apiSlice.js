@@ -4,7 +4,6 @@ import { setCredentials, logOut } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "/api",
-
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().persistedReducer.auth.token;

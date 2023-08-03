@@ -29,14 +29,16 @@ const FullPost = () => {
   const [removeComment] = useRemoveCommentMutation();
 
   const handleRemovePost = async (id) => {
-    window.confirm("Удалить пост?");
-    await removePost(id);
-    navigate("/user/me");
+    if (window.confirm("Удалить пост?")) {
+      await removePost(id);
+      navigate("/user/me");
+    }
   };
 
   const handleRemoveComment = async (id) => {
-    window.confirm("Удалить комментарий?");
-    await removeComment(id);
+    if (window.confirm("Удалить комментарий?")) {
+      await removeComment(id);
+    }
   };
 
   let content;
