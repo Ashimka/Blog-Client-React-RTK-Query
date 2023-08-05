@@ -110,10 +110,10 @@ const FullPost = () => {
                 return (
                   <div className="comment-item" key={index}>
                     <div className="comment-avatar">
-                      {post?.post.user.avatarURL ? (
+                      {comm.user.avatarURL ? (
                         <img
                           className="avatar-image"
-                          src={`${process.env.REACT_APP_BASE_URL}/uploads${post.post.user.avatarURL}`}
+                          src={`${process.env.REACT_APP_BASE_URL}/uploads${comm.user.avatarURL}`}
                           alt={"avatar"}
                         />
                       ) : (
