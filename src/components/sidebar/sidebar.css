@@ -36,6 +36,9 @@
   font-size: 24px;
   font-weight: 600;
 }
+.user-sidebar__posts {
+  font-size: 14px;
+}
 .sidebar__posts {
   width: 100%;
   padding: 2rem 0;

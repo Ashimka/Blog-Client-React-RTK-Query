@@ -45,9 +45,14 @@ const Sidebar = () => {
                     icon={faCircleUser}
                   />
                 )}
-                <div className="user-sidebar__name">{user?.fullName}</div>
+                <div className="user-sidebar__name">{userIsAuth?.fullName}</div>
                 <div className="user-sidebar__posts">
-                  Постов у пользователя: 10
+                  {`Дата регистрации: ${new Date(
+                    userIsAuth.createdAt
+                  ).toLocaleDateString()}`}
+                </div>
+                <div className="user-sidebar__posts">
+                  {`Постов: ${userIsAuth.posts.length}`}
                 </div>
               </div>
             ) : (

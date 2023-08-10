@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import UsersList from "./components/UsersList";
 import UserAvatar from "./components/UserAvatar";
 import Home from "./pages/Home";
-import FullPost from "./pages/FullPost";
+import FullPost from "./pages/fullpost/FullPost";
 import Register from "./pages/Register";
 import Unauthorized from "./pages/Unauthorized";
 import UserPosts from "./pages/UserPosts";

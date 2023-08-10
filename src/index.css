@@ -77,6 +77,10 @@ h6 {
   font-size: inherit;
   font-weight: 400;
 }
+p {
+  margin-bottom: 1rem;
+  text-indent: 1rem;
+}
 
 /*  UTILITY CLASSES */
 

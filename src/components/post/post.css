@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border-bottom: 2px solid #efefef;
+  border-bottom: 2px solid #d6d6d6;
   padding-bottom: 5px;
 }
 .header-options {
@@ -79,7 +79,7 @@
   justify-content: space-between;
   margin-top: 15px;
   padding-top: 5px;
-  border-top: 2px solid #efefef;
+  border-top: 2px solid #d6d6d6;
   font-size: 14px;
   line-height: 28px;
 }
@@ -98,7 +98,7 @@
   justify-content: space-between;
 }
 .post__comment {
-  margin-top: 1.5rem;
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
