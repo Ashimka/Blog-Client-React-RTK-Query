@@ -20,6 +20,9 @@ const CreateComment = () => {
     e.preventDefault();
 
     try {
+      if (!comment) {
+        return setErrMsg("Пустой комментарий");
+      }
       await createComment({ text: comment, id: idPost.id }).unwrap();
       setComment("");
     } catch (error) {

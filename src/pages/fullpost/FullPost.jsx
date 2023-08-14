@@ -67,7 +67,7 @@ const FullPost = () => {
               </div>
               <div className="header-name">{post.post.user.fullName}</div>
               <div className="header-time">{post.post.date}</div>
-              {user?.role?.admin && (
+              {user?.role.admin && (
                 <button
                   onClick={() => handleRemovePost(post.post.id)}
                   className="header-delete-post"
@@ -124,7 +124,7 @@ const FullPost = () => {
                       )}
                       <div className="header-name">{comm.user.fullName}</div>
                       <div className="header-time">{comm.date}</div>
-                      {user?.role?.admin && (
+                      {user?.role.admin && (
                         <div
                           onClick={() => handleRemoveComment(comm.id)}
                           className="delete-comment"

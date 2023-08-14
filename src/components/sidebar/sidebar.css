@@ -48,9 +48,9 @@
   border-top: 2px solid #efefef;
   border-bottom: 2px solid #efefef;
 }
-.sidebar__posts-item {
+/* .sidebar__posts-item {
   cursor: pointer;
-}
+} */
 .cat__list {
   padding: 0 0.5rem;
   display: flex;

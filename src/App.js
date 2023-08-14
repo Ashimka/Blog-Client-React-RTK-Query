@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import UsersList from "./components/UsersList";
 import UserAvatar from "./components/UserAvatar";
 import Home from "./pages/Home";
+import PopularPosts from "./pages/PopularPosts";
 import FullPost from "./pages/fullpost/FullPost";
 import Register from "./pages/Register";
 import Unauthorized from "./pages/Unauthorized";
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/post/:id" element={<FullPost />} />
+          <Route path="/popular" element={<PopularPosts />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
 
           {/* protected route for the user */}
