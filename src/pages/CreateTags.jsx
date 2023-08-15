@@ -5,12 +5,12 @@ import { useCreateTagsMutation } from "../features/posts/postsApiSlice";
 import "./styles/createTags.css";
 
 const CreateTags = () => {
-  const [tag, setTag] = useState("");
+  const [cat, setCat] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   const errRef = useRef();
 
-  const [createTag, { isLoading, isSuccess }] = useCreateTagsMutation();
+  const [createCat, { isLoading, isSuccess }] = useCreateTagsMutation();
 
   let content;
 
@@ -18,25 +18,25 @@ const CreateTags = () => {
     e.preventDefault();
 
     try {
-      if (!tag) {
+      if (!cat) {
         return setErrMsg("Введите название тега");
       }
 
-      await createTag({ tag }).unwrap();
-      setTag("");
+      await createCat({ cat }).unwrap();
+      setCat("");
     } catch (error) {
       setErrMsg(error.data.message);
     }
   };
 
-  const HandleTagsInput = (e) => setTag(e.target.value);
+  const HandleTagsInput = (e) => setCat(e.target.value);
 
   if (isLoading) content = <p>Загрузка...</p>;
 
   content = (
     <>
       {isSuccess ? (
-        <p>Тег создан</p>
+        <p>Categorie создан</p>
       ) : (
         <>
           <p
@@ -52,7 +52,7 @@ const CreateTags = () => {
               <input
                 className="input-tags"
                 type="text"
-                value={tag}
+                value={cat}
                 id="tags"
                 placeholder="Название тега"
                 onChange={HandleTagsInput}

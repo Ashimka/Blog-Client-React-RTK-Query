@@ -35,15 +35,15 @@ const Home = () => {
                 <Post
                   key={post.id}
                   postId={post.id}
-                  avatarURL={post.avatarURL}
-                  fullName={post.fullName}
+                  avatarURL={post.user.avatarURL}
+                  fullName={post.user.fullName}
                   date={post.date}
                   title={post.title}
                   imageURL={post.imageURL}
                   text={post.text}
                   viewsCount={post.viewsCount}
                   comments={post.comments}
-                  categorie={post.tag_post}
+                  cat={post.cat_post}
                 />
               ))}
         </div>

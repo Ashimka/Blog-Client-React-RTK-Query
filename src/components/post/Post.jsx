@@ -8,8 +8,6 @@ import {
   faMessage,
 } from "@fortawesome/free-regular-svg-icons";
 
-// import { useGetPostsQuery } from "../../features/posts/postsApiSlice";
-
 import "./post.css";
 
 const Post = ({
@@ -22,23 +20,8 @@ const Post = ({
   text,
   viewsCount,
   comments,
-  categorie,
+  cat,
 }) => {
-  // const {
-  //   data: postsList,
-  //   isLoading,
-  //   isSuccess,
-  //   isError,
-  //   error,
-  // } = useGetPostsQuery();
-
-  // let content;
-
-  // if (isLoading) content = <p>"Загрузка..."</p>;
-  // if (isError) content = <p>{error?.data?.message}</p>;
-
-  // if (isSuccess) {
-  // const { posts } = postsList;
   return (
     <>
       <section className="main__post">
@@ -87,7 +70,7 @@ const Post = ({
               <span>{comments?.length}</span>
             </div>
             <div className="post__tags">
-              <span>{categorie?.tags}</span>
+              <span>{cat?.cats}</span>
             </div>
           </div>
         </div>

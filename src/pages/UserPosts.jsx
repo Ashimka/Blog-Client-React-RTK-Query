@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -44,7 +45,7 @@ const UserPosts = () => {
                       />
                     )}
                   </div>
-                  <div className="header-name">{post.user.fullName}</div>
+                  <div className="header-name">{post.user.login}</div>
                   <div className="header-time">{post.date}</div>
                   <div className="header-options">
                     <Link to={`/post/${post.id}/edit`}>
@@ -70,7 +71,10 @@ const UserPosts = () => {
                   )}
                 </div>
 
-                <div className="post__text">{post.text}</div>
+                <div className="post__text">
+                  {" "}
+                  <ReactMarkdown children={post.text} />
+                </div>
 
                 <div className="post__footer">
                   <div className="post__views">
@@ -85,8 +89,8 @@ const UserPosts = () => {
                     <span>{post?.comments.length}</span>
                   </div>
                   <div className="post__tags">
-                    {post.tag_post?.tags.split(",").map((tag, index) => {
-                      return <span key={index}>{tag}</span>;
+                    {post.cat_post?.cats.split(",").map((cat, index) => {
+                      return <span key={index}>{cat}</span>;
                     })}
                   </div>
                 </div>

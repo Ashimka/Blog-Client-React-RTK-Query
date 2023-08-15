@@ -55,16 +55,21 @@
 }
 .block-tags__list {
   max-height: 100px;
-  min-width: 160px;
+  width: 100%;
   overflow: auto;
   background-color: #ffffff;
   padding: 0.5rem;
 }
 .tags-list {
   display: flex;
-  flex-direction: column;
   gap: 0.5rem;
   cursor: pointer;
+  font-size: 18px;
+  color: #444;
+}
+.block-tags__title {
+  margin-bottom: 1rem;
+  font-size: 22px;
 }
 .tag-item:hover {
   font-weight: 600;

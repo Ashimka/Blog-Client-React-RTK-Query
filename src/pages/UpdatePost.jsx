@@ -19,14 +19,13 @@ const UpdatePost = () => {
   const { data } = useGetFullPostQuery(id);
   const [updatePost, { isLoading, isSuccess }] = useUpdatePostMutation();
   const [fileUpload] = useUploadImageMutation();
-  const { data: postTags } = useGetTagsListQuery();
+  const { data: postCats } = useGetTagsListQuery();
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [oldImageURL, setOldImageURL] = useState("");
   const [newImageURL, setNewImageURL] = useState("");
-  const [tagsPost, setTagsPost] = useState([]);
-  const [searchTag, setSearchTag] = useState("");
+  const [catsPost, setCatsPost] = useState([]);
 
   const [errMsg, setErrMsg] = useState("");
 
@@ -61,7 +60,7 @@ const UpdatePost = () => {
       setTitle(data.post.title);
       setText(data.post.text);
       setOldImageURL(data.post.imageURL);
-      setTagsPost(data.post.tag_post.tags.split(","));
+      setCatsPost(data.post.cat_post?.cats.split(","));
     }
   }, [data]);
 
@@ -85,16 +84,16 @@ const UpdatePost = () => {
     }
   };
 
-  const filterTags = postTags?.filter((tagList) => {
-    return tagList.tag.toLowerCase().includes(searchTag.toLowerCase());
-  });
+  const getCats = (e) => {
+    if (!catsPost) {
+      return setCatsPost([e.target.innerText]);
+    }
 
-  const getTags = (e) => {
-    setTagsPost([...tagsPost, e.target.innerText]);
+    setCatsPost([...catsPost, e.target.innerText]);
   };
 
   const removeTags = (e) => {
-    setTagsPost(tagsPost.filter((tag) => tag !== e.target.innerText));
+    setCatsPost(catsPost.filter((cat) => cat !== e.target.innerText));
   };
 
   const handleSubmit = async (e) => {
@@ -113,13 +112,13 @@ const UpdatePost = () => {
         title,
         text,
         imageURL: imageUpdate,
-        tags: tagsPost.join(),
+        cats: catsPost.join(),
       }).unwrap();
 
       setTitle("");
       setText("");
       setNewImageURL("");
-      setTagsPost("");
+      setCatsPost("");
     } catch (error) {
       console.log(error);
 
@@ -137,8 +136,6 @@ const UpdatePost = () => {
 
   const HandleTitleInput = (e) => setTitle(e.target.value);
 
-  const HandleSearchTag = (e) => setSearchTag(e.target.value);
-
   if (isLoading) content = <p>Загрузка...</p>;
 
   content = (
@@ -146,7 +143,7 @@ const UpdatePost = () => {
       {isSuccess ? (
         <>
           <p>Пост от редактирован</p>
-          <Link to={`/post/${id}`}>Проверить</Link>
+          <Link to={`/post/${id}`}>Посмотреть</Link>
         </>
       ) : (
         <>
@@ -226,29 +223,23 @@ const UpdatePost = () => {
               <SimpleMDE value={text} onChange={onChange} options={options} />
             </label>
             <div className="block-tags">
-              <input
-                type="text"
-                className="block-tags__input"
-                placeholder="Введите название тега"
-                onChange={HandleSearchTag}
-              />
               <div className="block-tags__out" onClick={removeTags}>
-                {tagsPost &&
-                  tagsPost?.map((tag, index) => {
+                {catsPost &&
+                  catsPost?.map((cat, index) => {
                     return (
                       <span className="tag-out" key={index}>
-                        {tag}
+                        {cat}
                       </span>
                     );
                   })}
               </div>
 
               <div className="block-tags__list">
-                <ul className="tags-list" onClick={getTags}>
-                  {filterTags?.map((tag, index) => {
+                <ul className="tags-list" onClick={getCats}>
+                  {postCats?.map((cat, index) => {
                     return (
-                      <li className="tag-item" key={index} value={tag.tag}>
-                        {tag.tag}
+                      <li className="tag-item" key={index} value={cat.cat}>
+                        {cat.cat}
                       </li>
                     );
                   })}

@@ -14,8 +14,7 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [imageURL, setImageURL] = useState("");
-  const [tagsPost, setTagsPost] = useState([]);
-  const [searchTag, setSearchTag] = useState("");
+  const [catsPost, setCatsPost] = useState([]);
 
   const [errMsg, setErrMsg] = useState("");
 
@@ -25,18 +24,14 @@ const CreatePost = () => {
 
   const [createPost, { isLoading, isSuccess }] = useCreateNewPostMutation();
   const [fileUpload] = useUploadImageMutation();
-  const { data: tags } = useGetTagsListQuery();
+  const { data: cats } = useGetTagsListQuery();
 
-  const filterTags = tags?.filter((tagList) => {
-    return tagList.tag.toLowerCase().includes(searchTag.toLowerCase());
-  });
-
-  const getTags = (e) => {
-    setTagsPost([...tagsPost, e.target.innerText]);
+  const getCats = (e) => {
+    setCatsPost([...catsPost, e.target.innerText]);
   };
 
-  const removeTags = (e) => {
-    setTagsPost(tagsPost.filter((tag) => tag !== e.target.innerText));
+  const removeCats = (e) => {
+    setCatsPost(catsPost.filter((cat) => cat !== e.target.innerText));
   };
 
   let content;
@@ -87,7 +82,7 @@ const CreatePost = () => {
         title,
         text,
         imageURL,
-        tags: tagsPost.join(),
+        cats: catsPost.join(),
       };
 
       await createPost(postData).unwrap();
@@ -95,7 +90,7 @@ const CreatePost = () => {
       setTitle("");
       setText("");
       setImageURL("");
-      setTagsPost("");
+      setCatsPost("");
     } catch (error) {
       console.log(error);
 
@@ -109,7 +104,6 @@ const CreatePost = () => {
   };
   const CustomInputFile = () => imageRef.current.click();
   const HandleTitleInput = (e) => setTitle(e.target.value);
-  const HandleSearchTag = (e) => setSearchTag(e.target.value);
 
   if (isLoading) content = <p>Загрузка...</p>;
 
@@ -181,29 +175,24 @@ const CreatePost = () => {
               <SimpleMDE value={text} onChange={onChange} options={options} />
             </label>
             <div className="block-tags">
-              <input
-                type="text"
-                className="block-tags__input"
-                placeholder="Введите название тега"
-                onChange={HandleSearchTag}
-              />
-              <div className="block-tags__out" onClick={removeTags}>
-                {tagsPost &&
-                  tagsPost.map((tag, index) => {
+              <div className="block-tags__out" onClick={removeCats}>
+                {catsPost &&
+                  catsPost.map((cat, index) => {
                     return (
                       <span className="tag-out" key={index}>
-                        {tag}
+                        {cat}
                       </span>
                     );
                   })}
               </div>
 
               <div className="block-tags__list">
-                <ul className="tags-list" onClick={getTags}>
-                  {filterTags?.map((tag, index) => {
+                <div className="block-tags__title">Выберите категорию</div>
+                <ul className="tags-list" onClick={getCats}>
+                  {cats?.map((cat, index) => {
                     return (
-                      <li className="tag-item" key={index} value={tag.tag}>
-                        {tag.tag}
+                      <li className="tag-item" key={index} value={cat.cat}>
+                        {cat.cat}
                       </li>
                     );
                   })}

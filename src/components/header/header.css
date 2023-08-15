@@ -1,0 +1,33 @@
+/* HEADER */
+
+header {
+  background-color: #ffffff;
+}
+.header-wrap {
+  min-height: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.link-logo {
+  background-color: #0077ff;
+  color: #ffffff !important;
+  padding: 0.2rem;
+  border-radius: 8px;
+}
+.header__right {
+  display: flex;
+  align-items: center;
+}
+.header-link {
+  color: black;
+}
+.btn-out,
+.btn-form-image {
+  background: #0077ff;
+  opacity: 0.65;
+  margin-left: 15px;
+  color: #ffffff;
+  padding: 0.2rem;
+  border-radius: 5px;
+}

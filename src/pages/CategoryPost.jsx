@@ -1,30 +1,27 @@
+import { useSearchParams } from "react-router-dom";
 import Post from "../components/post/Post";
 import Sidebar from "../components/sidebar/Sidebar";
 
-import { useGetPostsQuery } from "../features/posts/postsApiSlice";
+import { useGetCategoryPostsQuery } from "../features/posts/postsApiSlice";
 
-const Home = () => {
+const CategoryPost = () => {
+  const [searchParams] = useSearchParams();
+  const cat = searchParams.get("category");
+
   const {
-    data: postsList,
+    data: postItems,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetPostsQuery();
-
-  const postItems = postsList?.posts;
+  } = useGetCategoryPostsQuery(cat);
 
   return (
     <>
       <div className="main__inner">
         {isLoading && <p>"Загрузка..."</p>}
 
-        {isError && (
-          <div>
-            <p className="errmsg">Произошла ошибка, посты не загружены</p>
-            <p>{error?.data?.message}</p>
-          </div>
-        )}
+        {isError && <p>{error?.data?.message}</p>}
 
         <div className="main__posts">
           {isSuccess &&
@@ -33,8 +30,8 @@ const Home = () => {
               <Post
                 key={post.id}
                 postId={post.id}
-                avatarURL={post.user.avatarURL}
-                fullName={post.user.fullName}
+                avatarURL={post.user?.avatarURL}
+                fullName={post.user.login}
                 date={post.date}
                 title={post.title}
                 imageURL={post.imageURL}
@@ -44,6 +41,8 @@ const Home = () => {
                 cat={post.cat_post}
               />
             ))}
+
+          {postItems?.length === 0 && <p>not posts</p>}
         </div>
 
         <Sidebar />
@@ -52,4 +51,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default CategoryPost;

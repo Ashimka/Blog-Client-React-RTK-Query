@@ -14,7 +14,7 @@ const Sidebar = () => {
   );
 
   const { data: user } = useGetOneUserQuery();
-  const { data: tags } = useGetTagsListQuery();
+  const { data: getCats } = useGetTagsListQuery();
 
   return (
     <>
@@ -35,7 +35,7 @@ const Sidebar = () => {
                     icon={faCircleUser}
                   />
                 )}
-                <div className="user-sidebar__name">{user?.fullName}</div>
+                <div className="user-sidebar__name">{user?.login}</div>
                 <div className="user-sidebar__posts">
                   {`Дата регистрации: ${new Date(
                     user?.createdAt
@@ -63,10 +63,14 @@ const Sidebar = () => {
           <div className="sidebar__categories cat">
             <div className="cat__title">Категории</div>
             <div className="cat__list">
-              {tags?.map((cat, index) => (
-                <span className="cat__link" key={index}>
-                  {cat.tag}
-                </span>
+              {getCats?.map((cat, index) => (
+                <Link
+                  to={`/post?category=${cat.cat}`}
+                  className="cat__link"
+                  key={index}
+                >
+                  {cat.cat}
+                </Link>
               ))}
             </div>
           </div>

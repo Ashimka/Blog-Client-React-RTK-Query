@@ -6,31 +6,31 @@ import { useNewUserMutation } from "../features/auth/registerApiSlice";
 const Register = () => {
   const [createUser, { isSuccess }] = useNewUserMutation();
 
-  const userRef = useRef();
-  const fullNameRef = useRef();
+  const emailRef = useRef();
+  const loginRef = useRef();
   const errRef = useRef();
   const [email, setEmail] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    userRef.current.focus();
+    loginRef.current.focus();
   }, []);
 
   useEffect(() => {
     setErrMsg("");
-  }, [email, fullName, password]);
+  }, [email, login, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await createUser({ email, fullName, password }).unwrap();
+      await createUser({ email, login, password }).unwrap();
 
       setEmail("");
-      setFullName("");
+      setLogin("");
       setPassword("");
     } catch (error) {
       console.log(error);
@@ -52,7 +52,7 @@ const Register = () => {
   };
 
   const handleEmailInput = (e) => setEmail(e.target.value);
-  const handleFullNameInput = (e) => setFullName(e.target.value);
+  const handleLoginInput = (e) => setLogin(e.target.value);
   const handlePassordInput = (e) => setPassword(e.target.value);
 
   const clickSignUp = () => {
@@ -82,26 +82,27 @@ const Register = () => {
             </p>
             <h1 className="login-title">Регистация</h1>
             <form onSubmit={handleSubmit}>
+              <label htmlFor="fullname">Логин:</label>
+              <input
+                type="text"
+                id="fullname"
+                ref={loginRef}
+                value={login}
+                onChange={handleLoginInput}
+                autoComplete="off"
+                required
+              />
               <label htmlFor="username">Email:</label>
               <input
                 type="text"
                 id="username"
-                ref={userRef}
+                ref={emailRef}
                 value={email}
                 onChange={handleEmailInput}
                 autoComplete="off"
                 required
               />
-              <label htmlFor="fullname">Никнейм:</label>
-              <input
-                type="text"
-                id="fullname"
-                ref={fullNameRef}
-                value={fullName}
-                onChange={handleFullNameInput}
-                autoComplete="off"
-                required
-              />
+
               <label htmlFor="password">Пароль:</label>
               <input
                 type="password"

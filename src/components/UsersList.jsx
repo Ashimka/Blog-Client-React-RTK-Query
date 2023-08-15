@@ -21,7 +21,7 @@ const UsersList = () => {
           <h1>Список пользователей</h1>
           <ul>
             {users.map((user, i) => {
-              return <li key={i}>{user.email}</li>;
+              return <li key={i}>{user.login}</li>;
             })}
           </ul>
           <Link to="/user/me">Назад</Link>

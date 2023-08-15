@@ -48,7 +48,7 @@ const UserPage = () => {
                   <Link to="/user/all">Список пользователей</Link>
                 </div>
                 <div>
-                  <Link to="/post/tags">Создать тег</Link>
+                  <Link to="/post/cats">Создать тег</Link>
                 </div>
               </>
             )}

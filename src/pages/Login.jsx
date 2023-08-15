@@ -10,12 +10,12 @@ import "./styles/login.css";
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [authUser, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,17 +24,17 @@ const Login = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [email, password]);
+  }, [login, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const userData = await login({ email, password }).unwrap();
+      const userData = await authUser({ login, password }).unwrap();
 
-      dispatch(setCredentials({ ...userData, email }));
+      dispatch(setCredentials({ ...userData, login }));
 
-      setEmail("");
+      setLogin("");
       setPassword("");
       navigate("/user/me");
     } catch (error) {
@@ -48,7 +48,7 @@ const Login = () => {
     }
   };
 
-  const handleUserInput = (e) => setEmail(e.target.value);
+  const handleUserInput = (e) => setLogin(e.target.value);
   const handlePassInput = (e) => setPassword(e.target.value);
 
   const clickSignUp = () => {
@@ -77,7 +77,7 @@ const Login = () => {
               type="text"
               id="username"
               ref={userRef}
-              value={email}
+              value={login}
               onChange={handleUserInput}
               autoComplete="off"
               required

@@ -52,7 +52,7 @@ const FullPost = () => {
           <div className="post">
             <div className="post__header">
               <div className="header-avatar">
-                {post?.post.user.avatarURL ? (
+                {post?.post?.user?.avatarURL ? (
                   <img
                     className="avatar-image"
                     src={`${process.env.REACT_APP_BASE_URL}/uploads${post.post.user.avatarURL}`}
@@ -65,9 +65,9 @@ const FullPost = () => {
                   />
                 )}
               </div>
-              <div className="header-name">{post.post.user.fullName}</div>
-              <div className="header-time">{post.post.date}</div>
-              {user?.role.admin && (
+              <div className="header-name">{post.post?.user.login}</div>
+              <div className="header-time">{post.post?.date}</div>
+              {user?.role?.admin && (
                 <button
                   onClick={() => handleRemovePost(post.post.id)}
                   className="header-delete-post"
@@ -77,7 +77,7 @@ const FullPost = () => {
               )}
             </div>
             <div className="post__title">
-              <h2 className="post__title-h2">{post.post.title}</h2>
+              <h2 className="post__title-h2">{post.post?.title}</h2>
             </div>
             <div className="post__img">
               {post.post.imageURL && (
@@ -90,7 +90,7 @@ const FullPost = () => {
             </div>
 
             <div className="fullpost__text">
-              <ReactMarkdown children={post.post.text} />
+              <ReactMarkdown children={post.post?.text} />
             </div>
 
             <div className="fullpost__footer">
@@ -99,8 +99,8 @@ const FullPost = () => {
                 <span>{post.post.viewsCount}</span>
               </div>
               <div className="post__tags">
-                {post.post.tag_post?.tags.split(",").map((tag, index) => {
-                  return <span key={index}>{tag}</span>;
+                {post.post.cat_post?.cats.split(",").map((cat, index) => {
+                  return <span key={index}>{cat}</span>;
                 })}
               </div>
             </div>
@@ -122,9 +122,9 @@ const FullPost = () => {
                           icon={faCircleUser}
                         />
                       )}
-                      <div className="header-name">{comm.user.fullName}</div>
+                      <div className="header-name">{comm.user.login}</div>
                       <div className="header-time">{comm.date}</div>
-                      {user?.role.admin && (
+                      {user?.role?.admin && (
                         <div
                           onClick={() => handleRemoveComment(comm.id)}
                           className="delete-comment"
