@@ -42,7 +42,7 @@ function App() {
             <Route path="/user/me" element={<UserPage />} />
             <Route path="/user/posts" element={<UserPosts />} />
             <Route path="/user/profile" element={<UserAvatar />} />
-            <Route path="/post" element={<CreatePost />} />
+            <Route path="/post/new" element={<CreatePost />} />
             <Route path="/post/:id/edit" element={<UpdatePost />} />
             <Route path="/post/:id/comments" element={<CreateComment />} />
           </Route>

@@ -62,6 +62,7 @@
 }
 .tags-list {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   cursor: pointer;
   font-size: 18px;

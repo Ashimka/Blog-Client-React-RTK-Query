@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 
 import { useGetOneUserQuery } from "../../features/users/usersApiSlice";
-import { useGetTagsListQuery } from "../../features/posts/postsApiSlice";
 
 import "./sidebar.css";
 
@@ -14,7 +13,6 @@ const Sidebar = () => {
   );
 
   const { data: user } = useGetOneUserQuery();
-  const { data: getCats } = useGetTagsListQuery();
 
   return (
     <>
@@ -51,28 +49,6 @@ const Sidebar = () => {
                 <Link to={"/register"}>Регистрация</Link>
               </div>
             )}
-          </div>
-          <div className="sidebar__posts">
-            <Link to={"/popular"} className="sidebar__posts-title">
-              Популярные посты
-            </Link>
-            <Link to={"/"} className="sidebar__posts-title">
-              Новые посты
-            </Link>
-          </div>
-          <div className="sidebar__categories cat">
-            <div className="cat__title">Категории</div>
-            <div className="cat__list">
-              {getCats?.map((cat, index) => (
-                <Link
-                  to={`/post?category=${cat.cat}`}
-                  className="cat__link"
-                  key={index}
-                >
-                  {cat.cat}
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </div>

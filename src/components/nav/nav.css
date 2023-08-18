@@ -1,0 +1,49 @@
+.nav-wrapper {
+  position: relative;
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  background-color: #fff;
+  height: 48px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav__posts {
+  display: flex;
+  gap: 1rem;
+}
+.active {
+  font-weight: 600;
+}
+.nav__categories {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.category__btn {
+  background: #0077ff;
+  color: #ffffff;
+  padding: 0.2rem;
+  border-radius: 5px;
+}
+.category__dropdown {
+  margin-top: 1rem;
+}
+.dropdown-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.8rem;
+  padding: 0.5rem;
+  background-color: silver;
+  opacity: 0.9;
+  border-radius: 5px;
+}
+.dropdown-link:hover,
+.nav__posts-title:hover {
+  color: #52059e;
+}

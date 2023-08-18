@@ -38,7 +38,7 @@ const UserPage = () => {
           </div>
           <div className="user__options">
             <Link to={"/user/profile"}>Загрузить аватар</Link>
-            <Link to={"/post"}>Добавить пост</Link>
+            <Link to={"/post/new"}>Добавить пост</Link>
             <Link to={"/user/posts"}>Мои посты</Link>
           </div>
           <div className="user__admin">

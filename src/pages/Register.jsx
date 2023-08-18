@@ -40,11 +40,11 @@ const Register = () => {
       }
 
       if (error.status === 409) {
-        setErrMsg("Пользователь с таким email уже существует");
+        setErrMsg(error.data.message);
       }
 
       if (error.status === 400) {
-        setErrMsg("Пользователь или пароль не найдены");
+        setErrMsg(error.data.message);
       }
 
       errRef.current.focus();

@@ -39,6 +39,7 @@
 }
 .user-sidebar__posts {
   font-size: 14px;
+  line-height: 1.4;
 }
 .sidebar__posts {
   width: 100%;
@@ -49,9 +50,7 @@
   border-top: 2px solid #efefef;
   border-bottom: 2px solid #efefef;
 }
-/* .sidebar__posts-item {
-  cursor: pointer;
-} */
+
 .cat__list {
   padding: 0 0.5rem;
   display: flex;
@@ -59,4 +58,30 @@
   align-items: flex-start;
   gap: 1rem;
   cursor: pointer;
+}
+@media (max-width: 610px) {
+  .main__sidebar {
+    display: none;
+  }
+  .sidebar {
+    flex-direction: row;
+    gap: 0;
+    position: absolute;
+    top: 65px;
+    right: 20px;
+    width: 94%;
+    height: 24px;
+    padding: 0.5rem;
+    background-color: #eee;
+  }
+  .sidebar__posts {
+    flex-direction: row;
+    padding: 0;
+  }
+  .cat__list {
+    display: none;
+  }
+  .sidebar__categories {
+    width: 100%;
+  }
 }

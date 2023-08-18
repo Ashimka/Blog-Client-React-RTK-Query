@@ -2,6 +2,7 @@ import { useResolvedPath } from "react-router-dom";
 
 import Post from "../components/post/Post";
 import Sidebar from "../components/sidebar/Sidebar";
+import Nav from "../components/nav/Nav";
 
 import { useGetPostsQuery } from "../features/posts/postsApiSlice";
 
@@ -19,6 +20,7 @@ const Home = () => {
 
   return (
     <>
+      <Nav />
       <div className="main__inner">
         {isLoading && <p>"Загрузка..."</p>}
 

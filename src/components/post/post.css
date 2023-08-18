@@ -4,7 +4,7 @@
 }
 .post {
   margin-top: 1.5rem;
-  min-width: 300px;
+  min-width: 280px;
   padding: 0.5rem;
   background-color: white;
   border-radius: 5px;
@@ -142,4 +142,10 @@
 }
 .footer__centr {
   color: #fff;
+}
+
+@media (max-width: 610px) {
+  .main__posts {
+    width: 100%;
+  }
 }
