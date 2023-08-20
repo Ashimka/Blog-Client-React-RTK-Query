@@ -1,9 +1,8 @@
 .main__posts {
   width: 70%;
-  margin-bottom: 1.5rem;
 }
 .post {
-  margin-top: 1.5rem;
+  margin: 1.5rem 0;
   min-width: 280px;
   padding: 0.5rem;
   background-color: white;

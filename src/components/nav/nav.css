@@ -39,8 +39,8 @@
   align-items: flex-end;
   gap: 0.8rem;
   padding: 0.5rem;
-  background-color: silver;
-  opacity: 0.9;
+  background-color: #b0b7c6;
+  opacity: 0.85;
   border-radius: 5px;
 }
 .dropdown-link:hover,

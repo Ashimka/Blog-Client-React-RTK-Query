@@ -13,7 +13,7 @@ import "./post.css";
 const Post = ({
   postId,
   avatarURL,
-  fullName,
+  login,
   date,
   title,
   imageURL,
@@ -38,7 +38,7 @@ const Post = ({
                 <FontAwesomeIcon className="avatar-image" icon={faCircleUser} />
               )}
             </div>
-            <div className="header-name">{fullName}</div>
+            <div className="header-name">{login}</div>
             <div className="header-time">{date}</div>
           </div>
           <div className="post__title">
