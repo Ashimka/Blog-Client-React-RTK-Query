@@ -12,7 +12,6 @@ const Home = () => {
     isError,
     error,
   } = useGetPostsQuery();
-
   const postItems = postsList?.posts;
 
   return (

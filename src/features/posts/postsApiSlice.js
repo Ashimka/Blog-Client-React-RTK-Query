@@ -4,11 +4,11 @@ export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: () => "/",
-      keepUnusedDataFor: 0.1,
+      providesTags: ["PostsList"],
     }),
     getFullPost: builder.query({
       query: (id) => `/post/${id}`,
-      keepUnusedDataFor: 0.1,
+      providesTags: ["PostsList", "CommentsList"],
     }),
     getCategoryPosts: builder.query({
       query: (cat) => `/post?category=${cat}`,
@@ -28,7 +28,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { ...formData },
       }),
-      keepUnusedDataFor: 0.1,
+      invalidatesTags: ["PostsList"],
     }),
     updatePost: builder.mutation({
       query: (formUpdata) => ({
@@ -36,14 +36,14 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: { ...formUpdata },
       }),
-      keepUnusedDataFor: 0.1,
+      invalidatesTags: ["PostsList"],
     }),
     removePost: builder.mutation({
       query: (id) => ({
         url: `/post/${id}`,
         method: "DELETE",
       }),
-      keepUnusedDataFor: 0.1,
+      invalidatesTags: ["PostsList"],
     }),
     createTags: builder.mutation({
       query: (cat) => ({
@@ -61,12 +61,14 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { ...comment },
       }),
+      invalidatesTags: ["CommentsList"],
     }),
     removeComment: builder.mutation({
       query: (id) => ({
         url: `/post/comment/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["CommentsList"],
     }),
   }),
 });

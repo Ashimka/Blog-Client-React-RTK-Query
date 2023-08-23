@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useEffect, useCallback } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import SimpleMDE from "react-simplemde-editor";
 
@@ -15,9 +15,10 @@ import "./styles/createPost.css";
 
 const UpdatePost = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { data } = useGetFullPostQuery(id);
-  const [updatePost, { isLoading, isSuccess }] = useUpdatePostMutation();
+  const [updatePost, { isLoading }] = useUpdatePostMutation();
   const [fileUpload] = useUploadImageMutation();
   const { data: postCats } = useGetTagsListQuery();
 
@@ -119,6 +120,7 @@ const UpdatePost = () => {
       setText("");
       setNewImageURL("");
       setCatsPost("");
+      navigate(`/post/${id}`);
     } catch (error) {
       console.log(error);
 
@@ -140,116 +142,107 @@ const UpdatePost = () => {
 
   content = (
     <>
-      {isSuccess ? (
-        <>
-          <p>Пост от редактирован</p>
-          <Link to={`/post/${id}`}>Посмотреть</Link>
-        </>
-      ) : (
-        <>
-          <p
-            ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
-            aria-live="assertive"
+      <p
+        ref={errRef}
+        className={errMsg ? "errmsg" : "offscreen"}
+        aria-live="assertive"
+      >
+        {errMsg}
+      </p>
+      <form
+        className="create-post"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
+        <label htmlFor="image">
+          <button
+            type="button"
+            className="btn-form-image"
+            onClick={CustomInputFile}
           >
-            {errMsg}
-          </p>
-          <form
-            className="create-post"
-            onSubmit={handleSubmit}
-            encType="multipart/form-data"
-          >
-            <label htmlFor="image">
-              <button
-                type="button"
-                className="btn-form-image"
-                onClick={CustomInputFile}
-              >
-                Добавить изорбажение
-              </button>
-              <input
-                type="file"
-                accept="image/jpeg, image/png, image/gif, image/webp"
-                id="image"
-                ref={imageRef}
-                onChange={HandleImageInput}
-                hidden
-              />
-              <div className="create-post__image">
-                {oldImageURL && (
-                  <>
-                    <button
-                      className="create-post__btn-delete-img"
-                      onClick={() => setOldImageURL("")}
-                    >
-                      удалить
-                    </button>
-                    <img
-                      className="post__img"
-                      src={`${process.env.REACT_APP_BASE_URL}/uploads/${oldImageURL}`}
-                      alt={oldImageURL.name}
-                    />
-                  </>
-                )}
-                {newImageURL && (
-                  <>
-                    <button
-                      className="create-post__btn-delete-img"
-                      onClick={() => setNewImageURL("")}
-                    >
-                      удалить
-                    </button>
-                    <img
-                      className="post__img"
-                      src={`${process.env.REACT_APP_BASE_URL}/uploads/${newImageURL}`}
-                      alt={newImageURL.name}
-                    />
-                  </>
-                )}
-              </div>
-            </label>
+            Добавить изорбажение
+          </button>
+          <input
+            type="file"
+            accept="image/jpeg, image/png, image/gif, image/webp"
+            id="image"
+            ref={imageRef}
+            onChange={HandleImageInput}
+            hidden
+          />
+          <div className="create-post__image">
+            {oldImageURL && (
+              <>
+                <button
+                  className="create-post__btn-delete-img"
+                  onClick={() => setOldImageURL("")}
+                >
+                  удалить
+                </button>
+                <img
+                  className="post__img"
+                  src={`${process.env.REACT_APP_BASE_URL}/uploads/${oldImageURL}`}
+                  alt={oldImageURL.name}
+                />
+              </>
+            )}
+            {newImageURL && (
+              <>
+                <button
+                  className="create-post__btn-delete-img"
+                  onClick={() => setNewImageURL("")}
+                >
+                  удалить
+                </button>
+                <img
+                  className="post__img"
+                  src={`${process.env.REACT_APP_BASE_URL}/uploads/${newImageURL}`}
+                  alt={newImageURL.name}
+                />
+              </>
+            )}
+          </div>
+        </label>
 
-            <label htmlFor="title">
-              <input
-                className="create-post__title"
-                type="text"
-                placeholder="Заголовок"
-                id="title"
-                value={title}
-                onChange={HandleTitleInput}
-              />
-            </label>
-            <label htmlFor="simplemde-editor-1">
-              <SimpleMDE value={text} onChange={onChange} options={options} />
-            </label>
-            <div className="block-tags">
-              <div className="block-tags__out" onClick={removeTags}>
-                {catsPost &&
-                  catsPost?.map((cat, index) => {
-                    return (
-                      <span className="tag-out" key={index}>
-                        {cat}
-                      </span>
-                    );
-                  })}
-              </div>
+        <label htmlFor="title">
+          <input
+            className="create-post__title"
+            type="text"
+            placeholder="Заголовок"
+            id="title"
+            value={title}
+            onChange={HandleTitleInput}
+          />
+        </label>
+        <label htmlFor="simplemde-editor-1">
+          <SimpleMDE value={text} onChange={onChange} options={options} />
+        </label>
+        <div className="block-tags">
+          <div className="block-tags__out" onClick={removeTags}>
+            {catsPost &&
+              catsPost?.map((cat, index) => {
+                return (
+                  <span className="tag-out" key={index}>
+                    {cat}
+                  </span>
+                );
+              })}
+          </div>
 
-              <div className="block-tags__list">
-                <ul className="tags-list" onClick={getCats}>
-                  {postCats?.map((cat, index) => {
-                    return (
-                      <li className="tag-item" key={index} value={cat.cat}>
-                        {cat.cat}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-            <button className="btn-form-submit">Редактировать</button>
-          </form>
-        </>
-      )}
+          <div className="block-tags__list">
+            <ul className="tags-list" onClick={getCats}>
+              {postCats?.map((cat, index) => {
+                return (
+                  <li className="tag-item" key={index} value={cat.cat}>
+                    {cat.cat}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+        <button className="btn-form-submit">Редактировать</button>
+      </form>
     </>
   );
 

@@ -17,6 +17,7 @@ import {
 } from "../../features/posts/postsApiSlice";
 import { useGetOneUserQuery } from "../../features/users/usersApiSlice";
 
+import CreateComment from "../CreateComment";
 import "./fullpost.css";
 
 const FullPost = () => {
@@ -138,12 +139,7 @@ const FullPost = () => {
                 );
               })}
             </div>
-            <button
-              className="comment-btn"
-              onClick={() => navigate(`/post/${params.id}/comments`)}
-            >
-              Написать комментарий
-            </button>
+            <CreateComment id={params.id} user={user} />
           </div>
         </section>
       </>

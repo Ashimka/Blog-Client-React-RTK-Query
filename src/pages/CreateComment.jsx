@@ -1,18 +1,16 @@
 import { useState, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
 
 import { useCreateCommentMutation } from "../features/posts/postsApiSlice";
 
 import "./styles/createComment.css";
 
-const CreateComment = () => {
-  const idPost = useParams();
+const CreateComment = ({ id, user }) => {
   const [comment, setComment] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   const errRef = useRef();
 
-  const [createComment, { isLoading, isSuccess }] = useCreateCommentMutation();
+  const [createComment, { isLoading }] = useCreateCommentMutation();
 
   let content;
 
@@ -23,10 +21,14 @@ const CreateComment = () => {
       if (!comment) {
         return setErrMsg("Пустой комментарий");
       }
-      await createComment({ text: comment, id: idPost.id }).unwrap();
+      await createComment({ text: comment, id }).unwrap();
       setComment("");
     } catch (error) {
-      setErrMsg(error.data.message);
+      console.log(error.originalStatus);
+      if (error.originalStatus === 500) {
+        setErrMsg("Зарегистрируйтесьб чтобы оставить комментарий");
+        setComment("");
+      }
     }
   };
 
@@ -36,35 +38,30 @@ const CreateComment = () => {
 
   content = (
     <>
-      {isSuccess ? (
-        <>
-          <p>Комментарий добавлен</p>
-          <Link to={`/post/${idPost.id}`}>Вернуться к посту</Link>
-        </>
-      ) : (
-        <>
-          <p
-            ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
-            aria-live="assertive"
-          >
-            {errMsg}
-          </p>
-          <form className="create-comment" onSubmit={handleSubmit}>
-            <label htmlFor="comment">
-              <textarea
-                className="comment-text"
-                type="text"
-                id="comment"
-                value={comment}
-                onChange={handleCommentInput}
-                placeholder="Напишите комментарий"
-              />
-            </label>
-            <button className="comment-btn-form">Добавить</button>
-          </form>
-        </>
-      )}
+      <>
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
+        <form className="create-comment" onSubmit={handleSubmit}>
+          <label htmlFor="comment">
+            <textarea
+              className="comment-text"
+              type="text"
+              id="comment"
+              value={comment}
+              onChange={handleCommentInput}
+              placeholder="Добавить комментарий"
+            />
+          </label>
+          <button disabled={!user} className="comment-btn-form">
+            Опубликовать
+          </button>
+        </form>
+      </>
     </>
   );
 

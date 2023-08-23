@@ -55,6 +55,11 @@ button::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
+button:disabled {
+  background: #a6b4b9;
+  color: #efefef;
+  cursor: not-allowed;
+}
 a,
 a:visited {
   text-decoration: none;
@@ -87,7 +92,7 @@ p {
 
 .errmsg {
   color: firebrick;
-  margin-bottom: 0.5rem;
+  margin: 1rem 0;
 }
 
 /*  GENERAL STYLES */
