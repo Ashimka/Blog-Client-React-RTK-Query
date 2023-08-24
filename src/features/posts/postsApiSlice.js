@@ -10,9 +10,12 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/post/${id}`,
       providesTags: ["PostsList", "CommentsList"],
     }),
+    getUserPosts: builder.query({
+      query: () => "/user/posts",
+      providesTags: ["PostsList"],
+    }),
     getCategoryPosts: builder.query({
       query: (cat) => `/post?category=${cat}`,
-      keepUnusedDataFor: 0.1,
     }),
     uploadImage: builder.mutation({
       query: (file) => ({
@@ -20,11 +23,10 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: file,
       }),
-      keepUnusedDataFor: 0.1,
     }),
     createNewPost: builder.mutation({
       query: (formData) => ({
-        url: "/post",
+        url: "/post/new",
         method: "POST",
         body: { ...formData },
       }),
@@ -85,4 +87,5 @@ export const {
   useCreateCommentMutation,
   useRemoveCommentMutation,
   useGetCategoryPostsQuery,
+  useGetUserPostsQuery,
 } = postsApiSlice;

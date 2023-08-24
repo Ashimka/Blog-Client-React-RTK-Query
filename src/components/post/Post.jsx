@@ -70,15 +70,15 @@ const Post = ({
               <span>{comments?.length}</span>
             </div>
             <div className="post__tags">
-              <span>{cat?.cats}</span>
+              {cat?.cats.split(",").map((c, index) => (
+                <span key={index}>{c}</span>
+              ))}
             </div>
           </div>
         </div>
       </section>
     </>
   );
-  // }
-  // return content;
 };
 
 export default Post;

@@ -7,9 +7,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     getOneUser: builder.query({
       query: () => `/user/me`,
-    }),
-    getUserPosts: builder.query({
-      query: () => "/user/posts",
+      keepUnusedDataFor: 1,
+      providesTags: ["Avatar"],
     }),
     updateAvatarUser: builder.mutation({
       query: (avatar) => ({
@@ -17,6 +16,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: { ...avatar },
       }),
+      invalidatesTags: ["Avatar"],
     }),
   }),
 });
@@ -24,6 +24,5 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetUsersQuery,
   useGetOneUserQuery,
-  useGetUserPostsQuery,
   useUpdateAvatarUserMutation,
 } = usersApiSlice;

@@ -9,7 +9,7 @@ import {
   faPenToSquare,
 } from "@fortawesome/free-regular-svg-icons";
 
-import { useGetUserPostsQuery } from "../features/users/usersApiSlice";
+import { useGetUserPostsQuery } from "../features/posts/postsApiSlice";
 
 const UserPosts = () => {
   const {

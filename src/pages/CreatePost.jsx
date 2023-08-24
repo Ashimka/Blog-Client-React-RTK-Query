@@ -1,4 +1,6 @@
 import { useState, useRef, useMemo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 import SimpleMDE from "react-simplemde-editor";
 
 import "easymde/dist/easymde.min.css";
@@ -11,6 +13,8 @@ import {
 } from "../features/posts/postsApiSlice";
 
 const CreatePost = () => {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -74,10 +78,6 @@ const CreatePost = () => {
     e.preventDefault();
 
     try {
-      if (!title || !text) {
-        return setErrMsg("Не заполнен заголовок или содержимое поста");
-      }
-
       const postData = {
         title,
         text,
@@ -91,11 +91,13 @@ const CreatePost = () => {
       setText("");
       setImageURL("");
       setCatsPost("");
+
+      navigate("/user/posts");
     } catch (error) {
       console.log(error);
 
       if (error.status === 400) {
-        setErrMsg("Не заполнен заголовок или содержимое поста");
+        setErrMsg(error.data.message);
       }
       if (error.status === 500) {
         setErrMsg("Internal Server Error");
