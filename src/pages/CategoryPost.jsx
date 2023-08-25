@@ -3,19 +3,30 @@ import Post from "../components/post/Post";
 import Sidebar from "../components/sidebar/Sidebar";
 import Nav from "../components/nav/Nav";
 
-import { useGetCategoryPostsQuery } from "../features/posts/postsApiSlice";
+import { useGetPostsQuery } from "../features/posts/postsApiSlice";
 
 const CategoryPost = () => {
   const [searchParams] = useSearchParams();
   const cat = searchParams.get("category");
 
+  const posts = [];
+
   const {
-    data: postItems,
+    data: postsList,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetCategoryPostsQuery(cat);
+  } = useGetPostsQuery();
+  const postItems = postsList?.posts;
+
+  postItems?.forEach((element) => {
+    const category = element.cat_post?.cats.split(",").includes(cat);
+
+    if (category) {
+      posts.push(element);
+    }
+  });
 
   return (
     <>
@@ -28,12 +39,12 @@ const CategoryPost = () => {
         <div className="main__posts">
           {isSuccess &&
             postItems &&
-            postItems.map((post) => (
+            posts?.map((post) => (
               <Post
                 key={post.id}
                 postId={post.id}
                 avatarURL={post.user?.avatarURL}
-                fullName={post.user.login}
+                login={post.user.login}
                 date={post.date}
                 title={post.title}
                 imageURL={post.imageURL}
@@ -44,9 +55,7 @@ const CategoryPost = () => {
               />
             ))}
 
-          {postItems?.length === 0 && (
-            <div className="post">Постов не найдено</div>
-          )}
+          {posts?.length === 0 && <div className="post">Постов не найдено</div>}
         </div>
 
         <Sidebar />

@@ -82,20 +82,20 @@ const Register = () => {
             </p>
             <h1 className="login-title">Регистация</h1>
             <form onSubmit={handleSubmit}>
-              <label htmlFor="fullname">Логин:</label>
+              <label htmlFor="login">Логин:</label>
               <input
                 type="text"
-                id="fullname"
+                id="login"
                 ref={loginRef}
                 value={login}
                 onChange={handleLoginInput}
                 autoComplete="off"
                 required
               />
-              <label htmlFor="username">Email:</label>
+              <label htmlFor="email">Email:</label>
               <input
-                type="text"
-                id="username"
+                type="email"
+                id="email"
                 ref={emailRef}
                 value={email}
                 onChange={handleEmailInput}
@@ -111,7 +111,12 @@ const Register = () => {
                 value={password}
                 required
               />
-              <button className="btn-signin">Создать</button>
+              <button
+                disabled={!login || !email || !password}
+                className="btn-signin"
+              >
+                Создать
+              </button>
               <button
                 className="btn-signup"
                 type="button"

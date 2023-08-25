@@ -91,7 +91,9 @@ const Login = () => {
               value={password}
               required
             />
-            <button className="btn-signin">Вход</button>
+            <button disabled={!login || !password} className="btn-signin">
+              Вход
+            </button>
             <button className="btn-signup" type="button" onClick={clickSignUp}>
               Создать аккаунт
             </button>

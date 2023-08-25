@@ -14,9 +14,6 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       query: () => "/user/posts",
       providesTags: ["PostsList"],
     }),
-    getCategoryPosts: builder.query({
-      query: (cat) => `/post?category=${cat}`,
-    }),
     uploadImage: builder.mutation({
       query: (file) => ({
         url: "/upload",
@@ -86,6 +83,5 @@ export const {
   useGetTagsListQuery,
   useCreateCommentMutation,
   useRemoveCommentMutation,
-  useGetCategoryPostsQuery,
   useGetUserPostsQuery,
 } = postsApiSlice;
