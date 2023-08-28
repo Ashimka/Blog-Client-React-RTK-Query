@@ -31,6 +31,14 @@ const CreatePost = () => {
   const { data: cats } = useGetTagsListQuery();
 
   const getCats = (e) => {
+    if (catsPost.includes(e.target.innerText)) {
+      return;
+    }
+
+    if (catsPost.length === 2) {
+      return;
+    }
+
     setCatsPost([...catsPost, e.target.innerText]);
   };
 
@@ -173,8 +181,13 @@ const CreatePost = () => {
                 onChange={HandleTitleInput}
               />
             </label>
-            <label htmlFor="simplemde-editor-2">
-              <SimpleMDE value={text} onChange={onChange} options={options} />
+            <label htmlFor="text">
+              <SimpleMDE
+                id="text"
+                value={text}
+                onChange={onChange}
+                options={options}
+              />
             </label>
             <div className="block-tags">
               <div className="block-tags__out" onClick={removeCats}>

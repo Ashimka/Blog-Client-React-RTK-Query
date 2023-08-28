@@ -43,15 +43,23 @@
   padding-left: 0.5rem;
 }
 .block-tags__out {
-  border-radius: 0.2rem;
-  padding-left: 0.5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 .tag-out {
+  position: relative;
   color: #0077ff;
+  padding: 0.2rem;
+  border-radius: 5px;
   cursor: pointer;
+}
+.tag-out::after {
+  content: "x";
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  color: tomato;
 }
 .block-tags__list {
   max-height: 100px;

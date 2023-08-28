@@ -4,11 +4,12 @@ export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: () => "/",
+      keepUnusedDataFor: 1,
       providesTags: ["PostsList"],
     }),
     getFullPost: builder.query({
       query: (id) => `/post/${id}`,
-      providesTags: ["PostsList", "CommentsList"],
+      providesTags: ["CommentsList"],
     }),
     getUserPosts: builder.query({
       query: () => "/user/posts",

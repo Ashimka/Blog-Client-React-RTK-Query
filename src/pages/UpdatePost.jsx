@@ -90,6 +90,14 @@ const UpdatePost = () => {
       return setCatsPost([e.target.innerText]);
     }
 
+    if (catsPost.includes(e.target.innerText)) {
+      return;
+    }
+
+    if (catsPost.length === 2) {
+      return;
+    }
+
     setCatsPost([...catsPost, e.target.innerText]);
   };
 
