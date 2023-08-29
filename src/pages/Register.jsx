@@ -1,7 +1,16 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
+import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
+
 import { useNewUserMutation } from "../features/auth/registerApiSlice";
+
+const LOGIN_REGEX = /^[а-яА-ЯёЁa-zA-Z][а-яА-ЯёЁa-zA-Z0-9!@#$%&*+=._-]{1,20}$/;
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const PASS_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Register = () => {
   const [createUser, { isSuccess }] = useNewUserMutation();
@@ -9,10 +18,20 @@ const Register = () => {
   const emailRef = useRef();
   const loginRef = useRef();
   const errRef = useRef();
+
   const [email, setEmail] = useState("");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
   const [errMsg, setErrMsg] = useState("");
+  const [loginFocus, setLoginFocus] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
+
+  const [validLogin, setValidLogin] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +41,14 @@ const Register = () => {
   useEffect(() => {
     setErrMsg("");
   }, [email, login, password]);
+
+  useEffect(() => {
+    setValidLogin(LOGIN_REGEX.test(login));
+    setValidEmail(EMAIL_REGEX.test(email));
+    setValidPassword(PASS_REGEX.test(password));
+  }, [login, email, password]);
+
+  console.log("login", login);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,17 +109,53 @@ const Register = () => {
             </p>
             <h1 className="login-title">Регистация</h1>
             <form onSubmit={handleSubmit}>
-              <label htmlFor="login">Логин:</label>
+              <label htmlFor="login">
+                Логин:
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  className={validLogin ? "icon-check" : "icon-hidden"}
+                />
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className={
+                    validLogin || !login ? "icon-hidden" : "icon-xmark"
+                  }
+                />
+              </label>
               <input
                 type="text"
                 id="login"
                 ref={loginRef}
                 value={login}
+                aria-invalid={validLogin ? "false" : "true"}
+                aria-describedby="loginnote"
+                onFocus={() => setLoginFocus(true)}
                 onChange={handleLoginInput}
                 autoComplete="off"
                 required
               />
-              <label htmlFor="email">Email:</label>
+              <p
+                id="loginnote"
+                className={
+                  loginFocus && login && !validLogin ? "options" : "icon-hidden"
+                }
+              >
+                Логин пользователя от 2 до 20 символов на латинице или
+                кириллице, цифры и спецсимволы. Первый символ обязательно буква
+              </p>
+              <label htmlFor="email">
+                Email:
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  className={validEmail ? "icon-check" : "icon-hidden"}
+                />
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className={
+                    validEmail || !email ? "icon-hidden" : "icon-xmark"
+                  }
+                />
+              </label>
               <input
                 type="email"
                 id="email"
@@ -101,18 +164,55 @@ const Register = () => {
                 onChange={handleEmailInput}
                 autoComplete="off"
                 required
+                aria-invalid={validEmail ? "false" : "true"}
+                aria-describedby="emailnote"
+                onFocus={() => setEmailFocus(true)}
               />
+              <p
+                id="emailnote"
+                className={
+                  emailFocus && email && !validEmail ? "options" : "icon-hidden"
+                }
+              >
+                Введите Ваш действующий email
+              </p>
 
-              <label htmlFor="password">Пароль:</label>
+              <label htmlFor="password">
+                Пароль:
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  className={validPassword ? "icon-check" : "icon-hidden"}
+                />
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className={
+                    validPassword || !password ? "icon-hidden" : "icon-xmark"
+                  }
+                />
+              </label>
               <input
                 type="password"
                 id="password"
                 onChange={handlePassordInput}
                 value={password}
                 required
+                aria-invalid={validPassword ? "false" : "true"}
+                aria-describedby="passwordnote"
+                onFocus={() => setPasswordFocus(true)}
               />
+              <p
+                id="passwordnote"
+                className={
+                  passwordFocus && password && !validPassword
+                    ? "options"
+                    : "icon-hidden"
+                }
+              >
+                Пароль должен состоять от 8 до 24 символов, из хотя бы одной
+                заглавной и строчной буквы, цифр и специальных символов
+              </p>
               <button
-                disabled={!login || !email || !password}
+                disabled={!validLogin || !validEmail || !validPassword}
                 className="btn-signin"
               >
                 Создать
