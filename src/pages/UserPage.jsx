@@ -10,7 +10,7 @@ import "./styles/userPage.css";
 const UserPage = () => {
   const { data: user, isSuccess, isLoading } = useGetOneUserQuery();
   const isAdmin = user?.role?.admin;
-
+  console.log(user);
   let content;
 
   if (isLoading) content = <p>Loading...</p>;
@@ -34,21 +34,36 @@ const UserPage = () => {
                 />
               )}
             </div>
-            <div className="user__name">{user.fullName}</div>
+            <div className="user__name">{user.login}</div>
           </div>
           <div className="user__options">
-            <Link to={"/user/profile"}>Загрузить аватар</Link>
-            <Link to={"/post/new"}>Добавить пост</Link>
-            <Link to={"/user/posts"}>Мои посты</Link>
-          </div>
-          <div className="user__admin">
-            {isAdmin && (
+            {user.isActivated && (
               <>
-                <div>
-                  <Link to="/user/all">Список пользователей</Link>
+                <Link to={"/user/profile"}>Загрузить аватар</Link>
+                <Link to={"/post/new"}>Добавить пост</Link>
+                <Link to={"/user/posts"}>Мои посты</Link>
+
+                <div className="user__admin">
+                  {isAdmin && (
+                    <>
+                      <div>
+                        <Link to="/user/all">Список пользователей</Link>
+                      </div>
+                      <div>
+                        <Link to="/post/cats">Создать тег</Link>
+                      </div>
+                    </>
+                  )}
                 </div>
+              </>
+            )}
+
+            {!user.isActivated && (
+              <>
+                <b>Аккаунт не активирован.</b>
                 <div>
-                  <Link to="/post/cats">Создать тег</Link>
+                  Для активации выслали письмо на Ваш email, указанный при
+                  регистрации
                 </div>
               </>
             )}

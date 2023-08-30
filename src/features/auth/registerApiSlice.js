@@ -12,6 +12,11 @@ export const registerApi = createApi({
         body,
       }),
     }),
+    activateUser: builder.query({
+      query: (link) => ({
+        url: `/activate/${link}`,
+      }),
+    }),
   }),
 });
-export const { useNewUserMutation } = registerApi;
+export const { useNewUserMutation, useActivateUserQuery } = registerApi;

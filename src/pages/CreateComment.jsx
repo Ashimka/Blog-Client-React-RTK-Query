@@ -57,7 +57,7 @@ const CreateComment = ({ id, user }) => {
               placeholder="Добавить комментарий"
             />
           </label>
-          <button disabled={!user} className="comment-btn-form">
+          <button disabled={!user.isActivated} className="comment-btn-form">
             Опубликовать
           </button>
         </form>

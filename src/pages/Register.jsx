@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
@@ -48,8 +48,6 @@ const Register = () => {
     setValidPassword(PASS_REGEX.test(password));
   }, [login, email, password]);
 
-  console.log("login", login);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -92,10 +90,11 @@ const Register = () => {
     <>
       {isSuccess ? (
         <section className="login">
-          <h2 className="login-title">Вы зарегистрировались!</h2>
-          <div className="login-subtitle">
-            <Link to={"/login"}>Вход</Link>
-          </div>
+          <p>
+            Для завершения регистрации активируйте аккаунт в письме,
+            отправленном на Ваш email, указанный при регистрации.
+          </p>
+          <p>P.S. письмо могло попасть в папку спам</p>
         </section>
       ) : (
         <div className="login-page">

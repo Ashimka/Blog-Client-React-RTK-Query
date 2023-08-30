@@ -17,6 +17,7 @@ import UpdatePost from "./pages/UpdatePost";
 import CreateTags from "./pages/CreateTags";
 import CreateComment from "./pages/CreateComment";
 import CategoryPost from "./pages/CategoryPost";
+import ActivateUser from "./pages/activate/ActivateUser";
 
 const ROLES = {
   "admin": 777,
@@ -32,6 +33,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/activate/:link" element={<ActivateUser />} />
           <Route path="/post/:id" element={<FullPost />} />
           <Route path="/post" element={<CategoryPost />} />
           <Route path="/popular" element={<PopularPosts />} />
