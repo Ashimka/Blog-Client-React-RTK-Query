@@ -23,6 +23,8 @@ const Register = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  const [showPass, setShowPass] = useState(false);
+
   const [errMsg, setErrMsg] = useState("");
   const [loginFocus, setLoginFocus] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
@@ -190,7 +192,7 @@ const Register = () => {
                 />
               </label>
               <input
-                type="password"
+                type={showPass ? "text" : "password"}
                 id="password"
                 onChange={handlePassordInput}
                 value={password}
@@ -199,6 +201,15 @@ const Register = () => {
                 aria-describedby="passwordnote"
                 onFocus={() => setPasswordFocus(true)}
               />
+              <div className="show-password">
+                <label htmlFor="show-password">Показать пароль</label>
+                <input
+                  className="input-checkbox"
+                  type="checkbox"
+                  id="show-password"
+                  onChange={() => setShowPass(!showPass)}
+                />
+              </div>
               <p
                 id="passwordnote"
                 className={

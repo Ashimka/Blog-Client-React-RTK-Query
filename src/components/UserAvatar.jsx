@@ -88,7 +88,7 @@ const UserAvatar = () => {
                     удалить
                   </button>
                   <img
-                    className="post__img"
+                    className="avatar-user"
                     src={`${process.env.REACT_APP_BASE_URL}/uploads${oldAvatar}`}
                     alt={oldAvatar.name}
                   />
@@ -113,6 +113,10 @@ const UserAvatar = () => {
                       onChange={HandleImageInput}
                       hidden
                     />
+
+                    <div className="image-info">
+                      <span>допустимый размер изображения 1 Mb</span>
+                    </div>
                   </label>
                 </>
               )}

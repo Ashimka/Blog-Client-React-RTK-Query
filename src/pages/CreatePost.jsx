@@ -75,7 +75,7 @@ const CreatePost = () => {
       formData.append("image", e.target.files[0]);
 
       const file = await fileUpload(formData).unwrap();
-      console.log(file);
+
       setImageURL(file.url);
     } catch (error) {
       console.log(error);
@@ -138,6 +138,7 @@ const CreatePost = () => {
           >
             <label htmlFor="image">
               <button
+                disabled={!!imageURL}
                 type="button"
                 className="btn-form-image"
                 onClick={CustomInputFile}
@@ -153,6 +154,11 @@ const CreatePost = () => {
                 onChange={HandleImageInput}
                 hidden
               />
+              {!imageURL && (
+                <div className="image-info">
+                  <span>допустимый размер изображения 1 Mb</span>
+                </div>
+              )}
             </label>
             <div className="create-post__image">
               {imageURL && (

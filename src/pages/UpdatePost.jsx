@@ -164,6 +164,7 @@ const UpdatePost = () => {
       >
         <label htmlFor="image">
           <button
+            disabled={!!newImageURL || !!oldImageURL}
             type="button"
             className="btn-form-image"
             onClick={CustomInputFile}
@@ -178,6 +179,11 @@ const UpdatePost = () => {
             onChange={HandleImageInput}
             hidden
           />
+          {!oldImageURL && !newImageURL && (
+            <div className="image-info">
+              <span>допустимый размер изображения 1 Mb</span>
+            </div>
+          )}
           <div className="create-post__image">
             {oldImageURL && (
               <>

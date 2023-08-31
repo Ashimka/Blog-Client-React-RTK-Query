@@ -13,6 +13,8 @@ const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [showPass, setShowPass] = useState(false);
+
   const navigate = useNavigate();
 
   const [authUser, { isLoading }] = useLoginMutation();
@@ -85,12 +87,22 @@ const Login = () => {
 
             <label htmlFor="password">Пароль:</label>
             <input
-              type="password"
+              type={showPass ? "text" : "password"}
               id="password"
               onChange={handlePassInput}
               value={password}
               required
             />
+            <div className="show-password">
+              <label htmlFor="show-password">Показать пароль</label>
+              <input
+                className="input-checkbox"
+                type="checkbox"
+                id="show-password"
+                onChange={() => setShowPass(!showPass)}
+              />
+            </div>
+
             <button disabled={!login || !password} className="btn-signin">
               Вход
             </button>

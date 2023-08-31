@@ -10,7 +10,7 @@ import "./styles/userPage.css";
 const UserPage = () => {
   const { data: user, isSuccess, isLoading } = useGetOneUserQuery();
   const isAdmin = user?.role?.admin;
-  console.log(user);
+
   let content;
 
   if (isLoading) content = <p>Loading...</p>;
