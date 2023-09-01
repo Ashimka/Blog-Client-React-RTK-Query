@@ -36,7 +36,7 @@ const Home = () => {
                 postId={post.id}
                 avatarURL={post.user.avatarURL}
                 login={post.user.login}
-                date={post.date}
+                createdAt={post.createdAt}
                 title={post.title}
                 imageURL={post.imageURL}
                 text={post.text}
