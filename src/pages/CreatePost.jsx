@@ -81,7 +81,9 @@ const CreatePost = () => {
       console.log(error);
 
       if (error.originalStatus === 413) {
-        setErrMsg("Допустимый размер изображений не болеьше 1 Mb");
+        setErrMsg(
+          "Ошибка при загрузке изображения, размер изображений не больше 1 Mb"
+        );
       }
     }
   };
