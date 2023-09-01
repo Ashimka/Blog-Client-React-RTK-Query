@@ -82,6 +82,9 @@ const UpdatePost = () => {
       setOldImageURL("");
     } catch (error) {
       console.log(error);
+      if (error.originalStatus === 413) {
+        setErrMsg("Допустимый размер изображений не болеьше 1 Mb");
+      }
     }
   };
 
