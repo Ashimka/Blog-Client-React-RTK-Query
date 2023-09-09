@@ -1,15 +1,22 @@
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+
 import Post from "../components/post/Post";
 import Sidebar from "../components/sidebar/Sidebar";
 import Nav from "../components/nav/Nav";
+import Pagination from "../components/pagination/Pagination";
 
-import { useGetPostsQuery } from "../features/posts/postsApiSlice";
+import { useGetCategoryPostsQuery } from "../features/posts/postsApiSlice";
 
 const CategoryPost = () => {
-  const [searchParams] = useSearchParams();
-  const cat = searchParams.get("category");
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const posts = [];
+  const { cat } = useParams();
+
+  const data = {
+    page: currentPage,
+    cat,
+  };
 
   const {
     data: postsList,
@@ -17,20 +24,13 @@ const CategoryPost = () => {
     isSuccess,
     isError,
     error,
-  } = useGetPostsQuery();
+  } = useGetCategoryPostsQuery(data);
   const postItems = postsList?.posts;
-
-  postItems?.forEach((element) => {
-    const category = element.cat_post?.cats.split(",").includes(cat);
-
-    if (category) {
-      posts.push(element);
-    }
-  });
 
   return (
     <>
       <Nav />
+
       <div className="main__inner">
         {isLoading && <p>"Загрузка..."</p>}
 
@@ -39,7 +39,7 @@ const CategoryPost = () => {
         <div className="main__posts">
           {isSuccess &&
             postItems &&
-            posts?.map((post) => (
+            postItems?.map((post) => (
               <Post
                 key={post.id}
                 postId={post.id}
@@ -55,11 +55,20 @@ const CategoryPost = () => {
               />
             ))}
 
-          {posts?.length === 0 && <div className="post">Постов не найдено</div>}
+          {postItems?.length === 0 && (
+            <div className="post">Постов не найдено</div>
+          )}
         </div>
 
         <Sidebar />
       </div>
+      {postsList?.totalPages > 1 && (
+        <Pagination
+          totalPages={postsList?.totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </>
   );
 };

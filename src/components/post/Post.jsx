@@ -70,9 +70,7 @@ const Post = ({
               <span>{comments?.length}</span>
             </div>
             <div className="post__tags">
-              {cat?.cats.split(",").map((c, index) => (
-                <span key={index}>{c}</span>
-              ))}
+              <span>{cat?.cats}</span>
             </div>
           </div>
         </div>

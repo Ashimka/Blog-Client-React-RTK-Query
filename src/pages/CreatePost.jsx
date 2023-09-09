@@ -35,7 +35,7 @@ const CreatePost = () => {
       return;
     }
 
-    if (catsPost.length === 2) {
+    if (catsPost.length === 1) {
       return;
     }
 
@@ -96,7 +96,7 @@ const CreatePost = () => {
         title,
         text,
         imageURL,
-        cats: catsPost.join(),
+        cats: catsPost,
       };
 
       await createPost(postData).unwrap();

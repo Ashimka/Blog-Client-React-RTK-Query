@@ -52,7 +52,7 @@ const Nav = () => {
                     onClick={handleDropdown}
                   >
                     <Link
-                      to={`/post?category=${cat.cat}`}
+                      to={`/post/category/${cat.cat}`}
                       className="dropdown-link"
                     >
                       {cat.cat}

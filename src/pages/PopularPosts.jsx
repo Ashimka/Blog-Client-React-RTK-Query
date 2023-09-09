@@ -1,19 +1,23 @@
+import { useState } from "react";
 import { useResolvedPath } from "react-router-dom";
 
 import Post from "../components/post/Post";
 import Sidebar from "../components/sidebar/Sidebar";
 import Nav from "../components/nav/Nav";
+import Pagination from "../components/pagination/Pagination";
 
-import { useGetPostsQuery } from "../features/posts/postsApiSlice";
+import { useGetPopularPostsQuery } from "../features/posts/postsApiSlice";
 
 const Home = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+
   const {
     data: postsList,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetPostsQuery();
+  } = useGetPopularPostsQuery(currentPage);
 
   const postItems = postsList?.posts;
   const { pathname } = useResolvedPath();
@@ -52,6 +56,13 @@ const Home = () => {
 
         <Sidebar />
       </div>
+      {postsList?.totalPages > 1 && (
+        <Pagination
+          totalPages={postsList?.totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </>
   );
 };

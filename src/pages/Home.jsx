@@ -1,17 +1,22 @@
+import { useState } from "react";
+
 import Post from "../components/post/Post";
 import Sidebar from "../components/sidebar/Sidebar";
 import Nav from "../components/nav/Nav";
+import Pagination from "../components/pagination/Pagination";
 
 import { useGetPostsQuery } from "../features/posts/postsApiSlice";
 
 const Home = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+
   const {
     data: postsList,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetPostsQuery();
+  } = useGetPostsQuery(currentPage);
   const postItems = postsList?.posts;
 
   return (
@@ -29,7 +34,6 @@ const Home = () => {
 
         <div className="main__posts">
           {isSuccess &&
-            postItems &&
             postItems.map((post) => (
               <Post
                 key={post.id}
@@ -46,8 +50,16 @@ const Home = () => {
               />
             ))}
         </div>
+
         <Sidebar />
       </div>
+      {postItems?.length && (
+        <Pagination
+          totalPages={postsList?.totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </>
   );
 };

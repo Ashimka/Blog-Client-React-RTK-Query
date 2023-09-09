@@ -35,7 +35,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/activate/:link" element={<ActivateUser />} />
           <Route path="/post/:id" element={<FullPost />} />
-          <Route path="/post" element={<CategoryPost />} />
+          <Route path="/post/category/:cat" element={<CategoryPost />} />
           <Route path="/popular" element={<PopularPosts />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
 

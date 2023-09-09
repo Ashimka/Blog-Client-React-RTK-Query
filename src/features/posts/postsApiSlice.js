@@ -3,7 +3,17 @@ import { apiSlice } from "../../app/api/apiSlice";
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => "/",
+      query: (page) => `/?page=${page}`,
+      keepUnusedDataFor: 1,
+      providesTags: ["PostsList"],
+    }),
+    getPopularPosts: builder.query({
+      query: (page) => `popular/?page=${page}`,
+      keepUnusedDataFor: 1,
+      providesTags: ["PostsList"],
+    }),
+    getCategoryPosts: builder.query({
+      query: (data) => `post/category/${data.cat}/?page=${data.page}`,
       keepUnusedDataFor: 1,
       providesTags: ["PostsList"],
     }),
@@ -75,6 +85,8 @@ export const postsApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetPostsQuery,
+  useGetPopularPostsQuery,
+  useGetCategoryPostsQuery,
   useGetFullPostQuery,
   useUploadImageMutation,
   useCreateNewPostMutation,
