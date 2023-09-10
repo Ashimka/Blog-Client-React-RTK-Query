@@ -1,9 +1,10 @@
-// import { useState } from "react";
-
 import "./pagination.css";
 
 const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
- 
+  const handleFirstPage = () => {
+    setCurrentPage(0);
+  };
+
   const handlePrevPage = () => {
     if (currentPage === 0) {
       return;
@@ -12,14 +13,14 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
   };
 
   const handleNextPage = () => {
-    if (currentPage === totalPages) {
+    if (currentPage === totalPages - 1) {
       return;
     }
     setCurrentPage(currentPage + 1);
   };
 
   const handleLastPage = () => {
-    setCurrentPage(totalPages);
+    setCurrentPage(totalPages - 1);
   };
 
   return (
@@ -27,18 +28,23 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
       <div className="pagination">
         <ul className="pagination__list">
           <li className="pagination__item">
+            <button className="pagination__btn" onClick={handleFirstPage}>
+              Первая
+            </button>
+          </li>
+          <li className="pagination__item">
             <button className="pagination__btn" onClick={handlePrevPage}>
-              prev
+              &larr;
             </button>
           </li>
           <li className="pagination__item">
             <button className="pagination__btn" onClick={handleNextPage}>
-              next
+              &rarr;
             </button>
           </li>
           <li className="pagination__item">
             <button className="pagination__btn" onClick={handleLastPage}>
-              {totalPages}
+              Последняя
             </button>
           </li>
         </ul>

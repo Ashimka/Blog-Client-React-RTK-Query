@@ -1,6 +1,5 @@
 .pagination {
-  margin: 1.5rem 0;
-  position: relative;
+  margin-bottom: 1.5rem;
 }
 .pagination__list {
   display: flex;
