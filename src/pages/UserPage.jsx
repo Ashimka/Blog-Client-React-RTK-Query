@@ -37,7 +37,7 @@ const UserPage = () => {
             <div className="user__name">{user.login}</div>
           </div>
           <div className="user__options">
-            {user.isActivated && (
+            {user?.isActivated && (
               <>
                 <Link to={"/user/profile"}>Загрузить аватар</Link>
                 <Link to={"/post/new"}>Добавить пост</Link>
