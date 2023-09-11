@@ -14,7 +14,7 @@ const Post = ({
   postId,
   avatarURL,
   login,
-  createdAt,
+  date,
   title,
   imageURL,
   text,
@@ -22,12 +22,6 @@ const Post = ({
   comments,
   cat,
 }) => {
-  const time = new Date(createdAt)
-    .toLocaleTimeString()
-    .split(":")
-    .splice(0, 2)
-    .join(":");
-
   return (
     <>
       <section className="main__post">
@@ -45,9 +39,7 @@ const Post = ({
               )}
             </div>
             <div className="header-name">{login}</div>
-            <div className="header-time">
-              {`${new Date(createdAt).toLocaleDateString()} ${time}`}
-            </div>
+            <div className="header-time">{date}</div>
           </div>
           <div className="post__title">
             <Link to={`/post/${postId}`}>

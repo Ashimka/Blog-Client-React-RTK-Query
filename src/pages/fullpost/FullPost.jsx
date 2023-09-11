@@ -29,12 +29,6 @@ const FullPost = () => {
   const [removePost] = useRemovePostMutation();
   const [removeComment] = useRemoveCommentMutation();
 
-  const time = new Date(post?.post?.createdAt)
-    .toLocaleTimeString()
-    .split(":")
-    .splice(0, 2)
-    .join(":");
-
   const handleRemovePost = async (id) => {
     if (window.confirm("Удалить пост?")) {
       await removePost(id);
@@ -73,9 +67,7 @@ const FullPost = () => {
                 )}
               </div>
               <div className="header-name">{post.post?.user.login}</div>
-              <div className="header-time">{`${new Date(
-                post.post?.createdAt
-              ).toLocaleDateString()} ${time}`}</div>
+              <div className="header-time">{post.post?.date}</div>
               {user?.role?.admin && (
                 <button
                   onClick={() => handleRemovePost(post.post.id)}

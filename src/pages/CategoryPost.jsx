@@ -29,46 +29,48 @@ const CategoryPost = () => {
 
   return (
     <>
-      <Nav />
+      <div className="wrapper">
+        <Nav />
 
-      <div className="main__inner">
-        {isLoading && <p>"Загрузка..."</p>}
+        <div className="main__inner">
+          {isLoading && <p>"Загрузка..."</p>}
 
-        {isError && <p>{error?.data?.message}</p>}
+          {isError && <p>{error?.data?.message}</p>}
 
-        <div className="main__posts">
-          {isSuccess &&
-            postItems &&
-            postItems?.map((post) => (
-              <Post
-                key={post.id}
-                postId={post.id}
-                avatarURL={post.user?.avatarURL}
-                login={post.user.login}
-                date={post.date}
-                title={post.title}
-                imageURL={post.imageURL}
-                text={post.text}
-                viewsCount={post.viewsCount}
-                comments={post.comments}
-                cat={post.cat_post}
-              />
-            ))}
+          <div className="main__posts">
+            {isSuccess &&
+              postItems &&
+              postItems?.map((post) => (
+                <Post
+                  key={post.id}
+                  postId={post.id}
+                  avatarURL={post.user?.avatarURL}
+                  login={post.user.login}
+                  date={post.date}
+                  title={post.title}
+                  imageURL={post.imageURL}
+                  text={post.text}
+                  viewsCount={post.viewsCount}
+                  comments={post.comments}
+                  cat={post.cat_post}
+                />
+              ))}
 
-          {postItems?.length === 0 && (
-            <div className="post">Постов не найдено</div>
-          )}
+            {postItems?.length === 0 && (
+              <div className="post">Постов не найдено</div>
+            )}
+          </div>
+
+          <Sidebar />
         </div>
-
-        <Sidebar />
+        {postsList?.totalPages > 1 && (
+          <Pagination
+            totalPages={postsList?.totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
       </div>
-      {postsList?.totalPages > 1 && (
-        <Pagination
-          totalPages={postsList?.totalPages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
     </>
   );
 };

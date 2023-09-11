@@ -46,13 +46,7 @@ const UserPosts = () => {
                     )}
                   </div>
                   <div className="header-name">{post.user.login}</div>
-                  <div className="header-time">{`${new Date(
-                    post?.createdAt
-                  ).toLocaleDateString()} ${new Date(post?.createdAt)
-                    .toLocaleTimeString()
-                    .split(":")
-                    .splice(0, 2)
-                    .join(":")}`}</div>
+                  <div className="header-time">{post.date}</div>
                   <div className="header-options">
                     <Link to={`/post/${post.id}/edit`}>
                       <FontAwesomeIcon

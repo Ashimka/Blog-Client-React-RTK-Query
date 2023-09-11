@@ -96,7 +96,7 @@ const CreatePost = () => {
         title,
         text,
         imageURL,
-        cats: catsPost,
+        cats: catsPost.join(),
       };
 
       await createPost(postData).unwrap();
@@ -114,7 +114,7 @@ const CreatePost = () => {
         setErrMsg(error.data.message);
       }
       if (error.status === 500) {
-        setErrMsg("Internal Server Error");
+        setErrMsg("Internal Server Error, Ошибка при создании поста");
       }
     }
   };

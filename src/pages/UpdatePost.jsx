@@ -61,7 +61,7 @@ const UpdatePost = () => {
       setTitle(data.post.title);
       setText(data.post.text);
       setOldImageURL(data.post.imageURL);
-      setCatsPost(data.post.cat_post?.cats.split(","));
+      setCatsPost([data.post.cat_post?.cats]);
     }
   }, [data]);
 
@@ -99,7 +99,7 @@ const UpdatePost = () => {
       return;
     }
 
-    if (catsPost.length === 2) {
+    if (catsPost.length === 1) {
       return;
     }
 
