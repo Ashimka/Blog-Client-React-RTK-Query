@@ -58,7 +58,7 @@ const Home = () => {
 
           <Sidebar />
         </div>
-        {postItems?.length > 0 && (
+        {postsList?.totalPages > 1 && (
           <Pagination
             totalPages={postsList?.totalPages}
             currentPage={currentPage}

@@ -4,6 +4,10 @@
   line-height: 22px;
   font-weight: 400;
 }
+.fullpost__text > p > a {
+  color: blue;
+  text-decoration: underline;
+}
 .fullpost__footer {
   display: flex;
   justify-content: space-between;

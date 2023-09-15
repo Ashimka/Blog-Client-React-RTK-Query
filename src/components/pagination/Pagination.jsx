@@ -1,8 +1,15 @@
+import { useSearchParams } from "react-router-dom";
+
 import "./pagination.css";
 
 const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const handleFirstPage = () => {
-    setCurrentPage(0);
+    if (searchParams.has("page")) {
+      setCurrentPage(0);
+      setSearchParams({ page: 0 });
+    }
   };
 
   const handlePrevPage = () => {
@@ -10,6 +17,7 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
       return;
     }
     setCurrentPage(currentPage - 1);
+    setSearchParams({ page: currentPage - 1 });
   };
 
   const handleNextPage = () => {
@@ -17,10 +25,14 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
       return;
     }
     setCurrentPage(currentPage + 1);
+    setSearchParams({ page: currentPage + 1 });
   };
 
   const handleLastPage = () => {
-    setCurrentPage(totalPages - 1);
+    if (searchParams.has("page")) {
+      setCurrentPage(totalPages - 1);
+      setSearchParams({ page: totalPages - 1 });
+    }
   };
 
   return (
